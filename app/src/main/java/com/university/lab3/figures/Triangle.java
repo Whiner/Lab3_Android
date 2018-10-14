@@ -2,6 +2,7 @@ package com.university.lab3.figures;
 
 import android.graphics.Canvas;
 import android.graphics.Path;
+import android.support.annotation.NonNull;
 
 public class Triangle extends Figure {
     @Override
@@ -16,9 +17,16 @@ public class Triangle extends Figure {
     }
 
     public Triangle() {
+        super();
     }
 
     public Triangle(int x, int y, int width, int height, int color, int transparency) {
         super(x, y, width, height, color, transparency);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Треугольник";
     }
 }

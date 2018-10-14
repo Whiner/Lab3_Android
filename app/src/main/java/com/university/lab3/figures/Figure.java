@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import java.util.EventListener;
+import com.university.lab3.FigureInstanceDivider;
 
 public abstract class Figure {
     private int x;
@@ -21,27 +21,8 @@ public abstract class Figure {
         this.y = y;
     }
 
-    public Figure divide(Canvas canvas) throws InstantiationException, IllegalAccessException {
-        Figure newFigure = this.getClass().newInstance();
-        newFigure.setColor(color);
-        newFigure.setHeight(height);
-        newFigure.setWidth(width);
-        newFigure.setTransparency(transparency);
-        if(x + width + margin + width < canvas.getMaximumBitmapWidth()){
-            newFigure.setX(x + width + margin);
-            newFigure.setY(y);
-        } else if(y + height + margin + height < canvas.getMaximumBitmapHeight()){
-            newFigure.setX(x);
-            newFigure.setY(y + height + margin);
-        } else if(x - width - margin - width > 0){
-            newFigure.setX(x - width - margin - width);
-            newFigure.setY(y);
-        } else {
-            newFigure.setX(x);
-            newFigure.setY(y - height - margin - height);
-        }
-        newFigure.draw(canvas);
-        return newFigure;
+    public Figure divide(Canvas canvas) {
+        return FigureInstanceDivider.divide(this, canvas.getHeight(), canvas.getWidth());
     }
 
     public abstract void draw(Canvas canvas);
