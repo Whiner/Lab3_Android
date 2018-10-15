@@ -1,7 +1,6 @@
 package com.university.lab3;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,7 +10,7 @@ public abstract class CustomTouchListener implements View.OnTouchListener {
     private Context _context;
 
 
-    public CustomTouchListener(Context context) {
+    public CustomTouchListener(final Context context) {
         this._context = context;
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -47,7 +46,7 @@ public abstract class CustomTouchListener implements View.OnTouchListener {
 
             @Override
             public void onLongPress(MotionEvent e) {
-                Log.i("custom", "onLongPress");
+                onLongTap(e);
                 super.onLongPress(e);
             }
 
@@ -63,6 +62,8 @@ public abstract class CustomTouchListener implements View.OnTouchListener {
         return true;
 
     }
+
+    public abstract void onLongTap(MotionEvent e);
 
     public abstract void onMove(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY);
 

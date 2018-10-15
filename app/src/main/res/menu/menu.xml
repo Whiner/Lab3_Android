@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/first"
+        android:title="@string/firstItem"
+        android:onClick="firstOnClick" />
+    <item
+        android:id="@+id/second"
+        android:title="@string/secondItem"
+        android:onClick="secondOnClick" />
+    <item
+        android:id="@+id/third"
+        android:title="@string/thirdItem"
+        android:onClick="thirdOnClick" />
+    <item
+        android:id="@+id/fourth"
+        android:title="@string/fourthItem"
+        android:onClick="fourthOnClick" />
+    <item
+        android:id="@+id/fifth"
+        android:title="@string/fifthItem"
+        android:onClick="fifthOnClick" />
+
+
+</menu>

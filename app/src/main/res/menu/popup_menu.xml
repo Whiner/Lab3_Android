@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <group android:id="@+id/menu_group">
+        <item
+            android:id="@+id/transparency"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/transparency" />
+        <item
+            android:id="@+id/figureSize"
+            android:title="@string/figureSize" />
+        <item
+            android:id="@+id/combo"
+            android:title="@string/combo"></item>
+    </group>
+
+</menu>
