@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.university.lab3.figures.Figure;
@@ -18,10 +19,10 @@ class DrawView extends View {
     private Canvas canvas;
     private Figure movingFigure;
     private Figure contextMenuFigure;
+    private final int figuresSize = 150;
 
     public DrawView(final Context context) {
         super(context);
-        final View thisView = this;
         this.setOnTouchListener(new CustomTouchListener(context) {
 
             @Override
@@ -80,25 +81,120 @@ class DrawView extends View {
     //Toast.makeText(context, "Menu item " + i, Toast.LENGTH_SHORT).show();
     private void createAlertDialog(final Context context) {
         new AlertDialog.Builder(context).setItems(
-                new CharSequence[]{"Прозрачность", "Масштаб", "Комбинированное преобразвоание"}, new DialogInterface.OnClickListener() {
+                new CharSequence[]{"Прозрачность", "Масштаб", "Комбинированное преобразование"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setPositiveButton("Применить", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        View seekBar = null;
                         switch (i) {
                             case 0:
-                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                builder.setView(findViewById(R.id.dialog)); // не работает
+                                seekBar = createSeekBar(
+                                        context,
+                                        contextMenuFigure.getTransparency(),
+                                        new SeekBar.OnSeekBarChangeListener() {
+                                            @Override
+                                            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                                                contextMenuFigure.setTransparency(i);
+                                                invalidate();
+                                            }
 
-                                builder.create().show();
+                                            @Override
+                                            public void onStartTrackingTouch(SeekBar seekBar) {
+                                            }
+
+                                            @Override
+                                            public void onStopTrackingTouch(SeekBar seekBar) {
+                                            }
+
+                                        });
+                                builder.setTitle("Прозрачность");
                                 break;
                             case 1:
+                                seekBar = createSeekBar(
+                                        context,
+                                        FigureEditor.convertSizeToSeekBarValue(
+                                                figuresSize,
+                                                (contextMenuFigure.getHeight() + contextMenuFigure.getWidth()) / 2
+                                        ),
+                                        new SeekBar.OnSeekBarChangeListener() {
+                                            @Override
+                                            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                                                int size = FigureEditor.convertFromSeekBarToSize(figuresSize, i);
+                                                FigureEditor.scale(
+                                                        contextMenuFigure,
+                                                        size,
+                                                        size);
+                                                invalidate();
+                                            }
+
+                                            @Override
+                                            public void onStartTrackingTouch(SeekBar seekBar) {
+                                            }
+
+                                            @Override
+                                            public void onStopTrackingTouch(SeekBar seekBar) {
+                                            }
+
+                                        });
+                                builder.setTitle("Масштаб");
                                 break;
                             case 2:
+                                int seekBarValue = FigureEditor.convertSizeToSeekBarValue(
+                                        figuresSize,
+                                        (contextMenuFigure.getHeight() + contextMenuFigure.getWidth()) / 2
+                                );
+                                seekBar = createSeekBar(context,
+                                        (seekBarValue + contextMenuFigure.getTransparency()) / 2,
+                                        new SeekBar.OnSeekBarChangeListener() {
+                                            @Override
+                                            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                                                int size = FigureEditor.convertFromSeekBarToSize(figuresSize, i);
+                                                FigureEditor.scale(
+                                                        contextMenuFigure,
+                                                        size,
+                                                        size);
+                                                contextMenuFigure.setTransparency(i);
+                                                invalidate();
+                                            }
+
+                                            @Override
+                                            public void onStartTrackingTouch(SeekBar seekBar) {
+
+                                            }
+
+                                            @Override
+                                            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                                            }
+                                        }
+                                );
+                                builder.setTitle("Комбинация");
                                 break;
                             default:
                                 Toast.makeText(context, "Menu item " + i, Toast.LENGTH_SHORT).show();
                         }
+                        builder.setView(seekBar);
+                        builder.create().show();
                     }
                 }).create().show();
+    }
+
+
+    private SeekBar createSeekBar(Context context,
+                                  int currentValue,
+                                  SeekBar.OnSeekBarChangeListener onSeekBarChangeListener) {
+        SeekBar seekBar = new SeekBar(context);
+        seekBar.setMax(100);
+        seekBar.setOnSeekBarChangeListener(onSeekBarChangeListener);
+        seekBar.setProgress(currentValue);
+        seekBar.setKeyProgressIncrement(1);
+        return seekBar;
     }
 
     @Override
@@ -110,6 +206,10 @@ class DrawView extends View {
     @Override
     public boolean performClick() {
         return super.performClick();
+    }
+
+    public int getFiguresSize() {
+        return figuresSize;
     }
 
     public void redraw() {

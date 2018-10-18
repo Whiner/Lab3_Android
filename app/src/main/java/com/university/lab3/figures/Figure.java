@@ -66,6 +66,7 @@ public abstract class Figure {
 
     public void setColor(int color) {
         this.color = color;
+        this.paint.setColor(color);
     }
 
     public int getTransparency() {
@@ -74,6 +75,7 @@ public abstract class Figure {
 
     public void setTransparency(int transparency) {
         this.transparency = transparency;
+        this.paint.setAlpha(transparency);
     }
 
     public int getX() {
