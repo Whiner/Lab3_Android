@@ -1,10 +1,10 @@
 package com.university.lab3.figures;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.university.lab3.FigureInstanceDivider;
+import com.university.lab3.color.RandomColor;
 
 public abstract class Figure {
     private int x;
@@ -32,7 +32,7 @@ public abstract class Figure {
         sizeFactor = 1;
         transparency = 255;
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.RED);
+        paint.setColor(RandomColor.get());
     }
 
     public Figure(int x, int y, int width, int height, int color, int transparency) {
@@ -43,6 +43,7 @@ public abstract class Figure {
         this.height = height;
         this.color = color;
         this.transparency = transparency;
+        paint.setColor(color);
     }
 
     public int getMargin() {

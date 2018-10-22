@@ -1,7 +1,6 @@
 package com.university.lab3;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -17,12 +16,14 @@ public class CustomFigureDrawerListener extends CustomTouchListener {
     private List<Figure> figures;
     private DrawView view;
     private TouchType lastTouchType = TouchType.UP;
+    private int color;
 
-    public CustomFigureDrawerListener(Context context, DrawView view) {
+    public CustomFigureDrawerListener(Context context, DrawView view, int color) {
         super(context);
         this.view = view;
         this.figures = view.getFigures();
         this.brushSize = view.getBrushSize();
+        this.color = color;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class CustomFigureDrawerListener extends CustomTouchListener {
                                 (int) e2.getY(),
                                 brushSize,
                                 brushSize,
-                                Color.DKGRAY,
+                                color,
                                 255));
                 Log.i("_sizes", "x + width: " + (e2.getX() + brushSize));
             } catch (Exception e) {

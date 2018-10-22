@@ -58,8 +58,8 @@ public class AlertDialogCreator {
                                                 float sizeFactor = FigureEditor.getSizeFactor(i);
                                                 FigureEditor.scale(
                                                         contextMenuFigure,
-                                                        (int) (contextMenuFigure.getWidth() / contextMenuFigure.getSizeFactor() * sizeFactor),
-                                                        (int) (contextMenuFigure.getHeight() / contextMenuFigure.getSizeFactor() * sizeFactor)
+                                                        (int) (contextMenuFigure.getWidth() / contextMenuFigure.getSizeFactor() * sizeFactor + 0.5),
+                                                        (int) (contextMenuFigure.getHeight() / contextMenuFigure.getSizeFactor() * sizeFactor + 0.5)
                                                 );
                                                 contextMenuFigure.setSizeFactor(sizeFactor);
                                                 view.invalidate();
@@ -85,12 +85,12 @@ public class AlertDialogCreator {
                                             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
                                                 float sizeFactor = FigureEditor.getSizeFactor(i);
-                                                contextMenuFigure.setSizeFactor(sizeFactor);
                                                 FigureEditor.scale(
                                                         contextMenuFigure,
-                                                        (int) (contextMenuFigure.getWidth() / contextMenuFigure.getSizeFactor() * sizeFactor),
-                                                        (int) (contextMenuFigure.getHeight() / contextMenuFigure.getSizeFactor() * sizeFactor)
+                                                        (int) (contextMenuFigure.getWidth() / contextMenuFigure.getSizeFactor() * sizeFactor + 0.5),
+                                                        (int) (contextMenuFigure.getHeight() / contextMenuFigure.getSizeFactor() * sizeFactor + 0.5)
                                                 );
+                                                contextMenuFigure.setSizeFactor(sizeFactor);
                                                 contextMenuFigure.setTransparency(i);
                                                 view.invalidate();
                                             }

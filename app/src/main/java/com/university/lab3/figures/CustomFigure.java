@@ -30,7 +30,9 @@ public class CustomFigure extends Figure {
                 figure.draw(canvas);
             }
         } else {
-            canvas.drawBitmap(Bitmap.createScaledBitmap(bitmap, getWidth(), getHeight(), true), getX(), getY(), getPaint());
+            Bitmap copy = bitmap.copy(bitmap.getConfig(), true);
+            this.bitmap = Bitmap.createScaledBitmap(copy, getWidth(), getHeight(), true);
+            canvas.drawBitmap(bitmap, getX(), getY(), getPaint());
             Paint paint = new Paint();
             paint.setColor(Color.GRAY);
             canvas.drawLine(getX() - 1, getY() - 1, getX() + getWidth() + 1, getY() - 1, paint);

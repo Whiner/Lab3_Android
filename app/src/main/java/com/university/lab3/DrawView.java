@@ -25,8 +25,8 @@ class DrawView extends View {
         this.setOnTouchListener(new MainTouchListener(getContext(), this));
     }
 
-    public void drawCustomFigure() {
-        this.setOnTouchListener(new CustomFigureDrawerListener(getContext(), this));
+    public void drawCustomFigure(int color) {
+        this.setOnTouchListener(new CustomFigureDrawerListener(getContext(), this, color));
     }
 
 
@@ -54,7 +54,6 @@ class DrawView extends View {
     public void add(Figure figure) {
         figures.add(figure);
         if (canvas != null) {
-            redraw();
             invalidate();
         }
     }

@@ -1,11 +1,12 @@
 package com.university.lab3;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.university.lab3.color.RandomColor;
 import com.university.lab3.figures.Circle;
 import com.university.lab3.figures.Square;
 import com.university.lab3.figures.Triangle;
@@ -28,19 +29,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void firstOnClick(MenuItem item) {
-        view.add(new Square(450, 10, view.getFiguresSize(), view.getFiguresSize(), Color.GREEN, 255));
+        view.add(new Square(10, 10, view.getFiguresSize(), view.getFiguresSize(), RandomColor.get(), 255));
     }
 
     public void secondOnClick(MenuItem item) {
-        view.add(new Circle(10, 10, view.getFiguresSize(), view.getFiguresSize(), Color.RED, 255));
+        view.add(new Circle(10, 10, view.getFiguresSize(), view.getFiguresSize(), RandomColor.get(), 255));
     }
 
     public void thirdOnClick(MenuItem item) {
-        view.add(new Triangle(10, 450, view.getFiguresSize(), view.getFiguresSize(), Color.BLUE, 255));
+        view.add(new Triangle(10, 10, view.getFiguresSize(), view.getFiguresSize(), RandomColor.get(), 255));
     }
 
     public void fourthOnClick(MenuItem item) {
-        view.drawCustomFigure();
+        view.drawCustomFigure(RandomColor.get());
     }
 
     public void fifthOnClick(MenuItem item) {
@@ -48,5 +49,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sixthOnClick(MenuItem item) {
+        boolean save = CanvasSaver.save(view);
+        new AlertDialog
+                .Builder(view.getContext())
+                .setMessage("Сохранено: " + save).show();
     }
 }
