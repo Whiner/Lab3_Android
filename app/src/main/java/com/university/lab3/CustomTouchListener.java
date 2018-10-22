@@ -74,42 +74,8 @@ public abstract class CustomTouchListener implements View.OnTouchListener {
     public abstract void onSingleClick(Context context, MotionEvent event);
 
     public abstract void onDoubleClick(Context context, MotionEvent event);
+
+    public Context getContext() {
+        return _context;
+    }
 }
-
-
-/*public class CustomDoubleClickListener extends GestureDetector.SimpleOnGestureListener {
-    private List<Figure> figures;
-    private Canvas canvas;
-
-    public CustomDoubleClickListener(List<Figure> figures, Canvas canvas) {
-        this.figures = figures;
-        this.canvas = canvas;
-    }
-
-    @Override
-    public boolean onDoubleTap(MotionEvent e) {
-        Figure figure = checkClick((int) e.getX(), (int) e.getY());
-        if(figure != null){
-            try {
-                figure.divide(canvas);
-                return true;
-            } catch (InstantiationException | IllegalAccessException e1) {
-                e1.printStackTrace();
-
-            }
-        }
-        return false;
-
-    }
-
-    private Figure checkClick(int x, int y){
-        for (Figure figure: figures){
-            if(x >= figure.getX() && y >= figure.getY()){
-                if(x <= figure.getX() + figure.getWidth() && y <= figure.getY() + figure.getHeight()){
-                    return figure;
-                }
-            }
-        }
-        return null;
-    }
-}*/

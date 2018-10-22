@@ -14,11 +14,7 @@ public class FigureEditor {
         figure.setHeight(newHeight);
     }
 
-    public static int convertFromSeekBarToSize(int standardSize, int seekValue) {
-        return standardSize / 50 * seekValue;
-    }
-
-    public static int convertSizeToSeekBarValue(int standardSize, int figureSize) {
-        return figureSize / (standardSize / 50);
+    public static float getSizeFactor(int seekValue) {
+        return (float) ((float) seekValue / 255 + 0.5);
     }
 }

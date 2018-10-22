@@ -14,6 +14,7 @@ public abstract class Figure {
     private int color;
     private int transparency;
     private int margin = 5;
+    private float sizeFactor;
     private Paint paint = new Paint();
 
     public void move(int x, int y) {
@@ -28,20 +29,20 @@ public abstract class Figure {
     public abstract void draw(Canvas canvas);
 
     public Figure() {
+        sizeFactor = 1;
+        transparency = 255;
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.RED);
     }
 
     public Figure(int x, int y, int width, int height, int color, int transparency) {
+        this();
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
         this.transparency = transparency;
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(color);
-        paint.setAlpha(transparency);
     }
 
     public int getMargin() {
@@ -57,7 +58,8 @@ public abstract class Figure {
     }
 
     public void setPaint(Paint paint) {
-        this.paint = paint;
+        this.paint.setColor(paint.getColor());
+        this.paint.setAlpha(paint.getAlpha());
     }
 
     public int getColor() {
@@ -83,6 +85,9 @@ public abstract class Figure {
     }
 
     public void setX(int x) {
+        if (x <= 0) {
+            x = 1;
+        }
         this.x = x;
     }
 
@@ -91,7 +96,18 @@ public abstract class Figure {
     }
 
     public void setY(int y) {
+        if (y <= 0) {
+            y = 1;
+        }
         this.y = y;
+    }
+
+    public float getSizeFactor() {
+        return sizeFactor;
+    }
+
+    public void setSizeFactor(float sizeFactor) {
+        this.sizeFactor = sizeFactor;
     }
 
     public int getWidth() {

@@ -28,21 +28,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void firstOnClick(MenuItem item) {
-        view.add(new Square(450, 10, view.getFiguresSize(), view.getFiguresSize(), Color.GREEN, 100));
+        view.add(new Square(450, 10, view.getFiguresSize(), view.getFiguresSize(), Color.GREEN, 255));
     }
 
     public void secondOnClick(MenuItem item) {
-        view.add(new Circle(10, 10, view.getFiguresSize(), view.getFiguresSize(), Color.RED, 100));
+        view.add(new Circle(10, 10, view.getFiguresSize(), view.getFiguresSize(), Color.RED, 255));
     }
 
     public void thirdOnClick(MenuItem item) {
-        view.add(new Triangle(10, 450, view.getFiguresSize(), view.getFiguresSize(), Color.BLUE, 100));
+        view.add(new Triangle(10, 450, view.getFiguresSize(), view.getFiguresSize(), Color.BLUE, 255));
     }
 
     public void fourthOnClick(MenuItem item) {
+        view.drawCustomFigure();
     }
 
     public void fifthOnClick(MenuItem item) {
         view.clear();
+    }
+
+    public void sixthOnClick(MenuItem item) {
     }
 }

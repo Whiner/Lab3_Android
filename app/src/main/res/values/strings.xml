@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Lab3</string>
+    <string name="app_name">Лабораторная №3</string>
     <string name="firstItem">Квадрат</string>
     <string name="secondItem">Круг</string>
     <string name="thirdItem">Треугольник</string>
-    <string name="fourthItem">Сохранить</string>
+    <string name="fourthItem">Произвольная фигура</string>
     <string name="fifthItem">Очистить</string>
+    <string name="sixthItem">Сохранить</string>
     <string name="transparency">Прозрачность</string>
     <string name="figureSize">Размер фигуры</string>
     <string name="combo">Комбинированное преобразование</string>

@@ -1,6 +1,7 @@
 package com.university.lab3;
 
 import com.university.lab3.figures.Circle;
+import com.university.lab3.figures.CustomFigure;
 import com.university.lab3.figures.Figure;
 import com.university.lab3.figures.Square;
 import com.university.lab3.figures.Triangle;
@@ -28,8 +29,10 @@ public class FigureInstanceDivider {
             newFigure = new Circle();
         } else if (figure instanceof Triangle) {
             newFigure = new Triangle();
-        } else {
+        } else if (figure instanceof Square) {
             newFigure = new Square();
+        } else {
+            newFigure = new CustomFigure(((CustomFigure) figure).getBitmap());
         }
         newFigure.setColor(figure.getColor());
         newFigure.setHeight(figure.getHeight());
