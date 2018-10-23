@@ -15,7 +15,6 @@ public class CustomFigureDrawerListener extends CustomTouchListener {
     private int brushSize;
     private List<Figure> figures;
     private DrawView view;
-    private TouchType lastTouchType = TouchType.UP;
     private int color;
 
     public CustomFigureDrawerListener(Context context, DrawView view, int color) {
@@ -44,36 +43,26 @@ public class CustomFigureDrawerListener extends CustomTouchListener {
                                 brushSize,
                                 color,
                                 255));
-                Log.i("_sizes", "x + width: " + (e2.getX() + brushSize));
             } catch (Exception e) {
                 Log.e("custom", e.getMessage());
             }
             if (!figures.contains(view.getMovingFigure())) {
                 figures.add(view.getMovingFigure());
             }
-            lastTouchType = TouchType.MOVE;
             view.invalidate();
         }
     }
 
     @Override
     public void onTouchUp(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        lastTouchType = TouchType.UP;
-        ((CustomFigure) view.getMovingFigure()).createBitmap();
-        view.invalidate();
-        view.setMovingFigure(null);
-        view.setMainTouchListener();
         Log.i("custom", "touchUp");
     }
 
     @Override
     public void onTouchDown(MotionEvent e) {
-        if (lastTouchType == TouchType.MOVE) {
-            Log.i("custom", "touchDown, without UP");
-            return;
+        if (view.getMovingFigure() == null && !view.isMainTouchListener()) {
+            view.setMovingFigure(new CustomFigure());
         }
-        lastTouchType = TouchType.DOWN;
-        view.setMovingFigure(new CustomFigure());
         Log.i("custom", "touchDown");
     }
 
@@ -85,6 +74,9 @@ public class CustomFigureDrawerListener extends CustomTouchListener {
 
     @Override
     public void onDoubleClick(Context context, MotionEvent event) {
-        Log.i("custom", "doubleClick");
+        ((CustomFigure) view.getMovingFigure()).createBitmap();
+        view.invalidate();
+        view.setMovingFigure(null);
+        view.setMainTouchListener();
     }
 }

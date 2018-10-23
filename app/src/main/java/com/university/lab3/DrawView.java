@@ -15,6 +15,7 @@ class DrawView extends View {
     private Figure movingFigure;
     private final int brushSize = 50;
     private final int figuresSize = 150;
+    private boolean mainTouchListener = true;
 
     public DrawView(final Context context) {
         super(context);
@@ -23,10 +24,12 @@ class DrawView extends View {
 
     public void setMainTouchListener() {
         this.setOnTouchListener(new MainTouchListener(getContext(), this));
+        mainTouchListener = true;
     }
 
     public void drawCustomFigure(int color) {
         this.setOnTouchListener(new CustomFigureDrawerListener(getContext(), this, color));
+        mainTouchListener = false;
     }
 
 
@@ -43,6 +46,10 @@ class DrawView extends View {
 
     public int getFiguresSize() {
         return figuresSize;
+    }
+
+    public boolean isMainTouchListener() {
+        return mainTouchListener;
     }
 
     public void redraw() {
